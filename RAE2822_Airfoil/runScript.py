@@ -52,9 +52,8 @@ daOptions = {
         "epsilon0": {"variable": "epsilon", "patches": ["inout"], "value": [epsilon0]},
         "useWallFunction": False,
     },
-    "objFunc": {
+    "function": {
         "CD": {
-            "part1": {
                 "type": "force",
                 "source": "patchToFace",
                 "patches": ["wing"],
@@ -62,10 +61,8 @@ daOptions = {
                 "direction": dragDir,
                 "scale": 1.0 / (0.5 * rho0 * U0 * U0 * A0),
                 "addToAdjoint": True,
-            }
         },
         "CL": {
-            "part1": {
                 "type": "force",
                 "source": "patchToFace",
                 "patches": ["wing"],
@@ -73,7 +70,6 @@ daOptions = {
                 "direction": liftDir,
                 "scale": 1.0 / (0.5 * rho0 * U0 * U0 * A0),
                 "addToAdjoint": True,
-            }
         },
     },
     "checkMeshThreshold": {"maxAspectRatio": 5000.0},
@@ -81,6 +77,8 @@ daOptions = {
 
 DASolver = PYDAFOAM(options=daOptions, comm=MPI.COMM_WORLD)
 DASolver()
-funcs = {}
-evalFuncs = ["CD", "CL"]
-DASolver.evalFunctions(funcs, evalFuncs)
+
+#
+#funcs = {}
+#evalFuncs = ["CD", "CL"]
+#DASolver.evalFunctions(funcs, evalFuncs)
